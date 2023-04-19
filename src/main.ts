@@ -12,9 +12,14 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true, // Evita que vengan mas parametros en el body de los que requiero
       forbidNonWhitelisted: true, // Muestra un error cuando se manda un parametro que no deberia mandar
+      transform: true, // Transforma los DTOs al tipo de dato esperado
+      transformOptions: {
+        enableImplicitConversion: true
+      }
     }),
   );
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT);
+  console.log('App listening on port ' + process.env.PORT);
 }
 bootstrap();
